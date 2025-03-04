@@ -8,9 +8,21 @@ struct Estado {
     char cidadeDestaque[50];
     int populacao;
     float area;
-    double pib; // Novo campo: PIB
-    char pontosTuristicos[200]; // Novo campo: Pontos Turísticos
+    double pib; // PIB em bilhões
+    char pontosTuristicos[200];
 };
+
+// Função para calcular a densidade populacional
+float calcularDensidadePopulacional(struct Estado estado) {
+    // Densidade populacional = população / área
+    return estado.populacao / estado.area;
+}
+
+// Função para calcular o PIB per capita
+double calcularPibPerCapita(struct Estado estado) {
+    // PIB per capita = (PIB em bilhões * 1 bilhão) / população
+    return (estado.pib * 1000000000) / estado.populacao;
+}
 
 // Função para exibir os detalhes do estado
 void exibirEstado(struct Estado estado) {
@@ -22,6 +34,15 @@ void exibirEstado(struct Estado estado) {
     printf("Área: %.2f km²\n", estado.area);
     printf("PIB: R$ %.2f bilhões\n", estado.pib);
     printf("Pontos Turísticos: %s\n", estado.pontosTuristicos);
+
+    // Exibindo a densidade populacional
+    float densidade = calcularDensidadePopulacional(estado);
+    printf("Densidade Populacional: %.2f hab/km²\n", densidade);
+
+    // Exibindo o PIB per capita
+    double pibPerCapita = calcularPibPerCapita(estado);
+    printf("PIB per Capita: R$ %.2f\n", pibPerCapita);
+
     printf("\n");
 }
 
